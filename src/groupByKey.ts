@@ -3,32 +3,32 @@ type GroupsMap<T> = {
 };
 
 interface Books {
-  'author': string,
-  'country': string,
-  'imagitemink': string,
-  'language': string,
-  'pages': number,
-  'title': string,
-  'year': number,
+  author: string,
+  country: string,
+  imagitemink: string,
+  language: string,
+  pages: number,
+  title: string,
+  year: number,
 }
 
 interface Students {
-  'name': string,
-  'surname': string,
-  'age': number,
-  'married': boolean,
-  'grades': number[],
+  name: string,
+  surname: string,
+  age: number,
+  married: boolean,
+  grades: number[],
 }
 
-type Result = Books & Students;
+type Result = Books | Students;
 
 export function groupByKey(
   items: Result[],
-  key: string,
+  key: keyof Result,
 ): GroupsMap<Result> {
   const result: GroupsMap<Result> = {};
 
-  items.forEach((item: any) => {
+  items.forEach((item: Result) => {
     if (!result[item[key]]) {
       result[item[key]] = [item];
     } else {
